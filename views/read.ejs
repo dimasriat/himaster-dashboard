@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dashboard</title>
+		<link rel="stylesheet" href="/assets/css/style.css" />
+	</head>
+	<body>
+		<div class="wrapper">
+			<%- include('components/header', {title: 'My Todo'}); %>
+			<%- include('components/nav'); %>
+			<% for (item of data) { %>
+			<div class="todo">
+				<div class="content">
+					<h3><%= item.title %></h3>
+					<p><%- item.body.split('\r\n').join('<br />') %></p>
+				</div>
+				<div class="control">
+					<a href="/update/<%= item.id %>">update</a>
+					<a href="/delete/<%= item.id %>">delete</a>
+				</div>
+			</div>
+			<% }; %>
+		</div>
+	</body>
+</html>
