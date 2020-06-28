@@ -15,11 +15,7 @@ exports.registerSubmit = [
 	check("username", "username cannot be blank").exists(),
 	body("username").custom((username) => {
 		return User.findOne({ where: { username } }).then((found) => {
-			if (found) {
-				return Promise.reject("username has been taken");
-			} else {
-				return Promise.resolve();
-			}
+			return found && Promise.reject("username has been taken");
 		});
 	}),
 	check("email", "email cannot be blank").exists(),

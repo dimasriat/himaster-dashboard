@@ -8,6 +8,7 @@ const {
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/User");
+
 router.get("/", (req, res) => {
 	res.render("dashboard");
 });
@@ -33,10 +34,11 @@ router
 		res.render("register", { error });
 	})
 	.post("/register", registerSubmit, async (req, res) => {
-		const error = validationResult(req).array();
-		const { username, password, email } = req.body;
-		if (error.length === 0) {
+		const error = validationResult(req);
+		if (error.isEmpty()) {
 			try {
+				const { username, password, email } = req.body;
+
 				const salt = await bcrypt.genSalt(10);
 				const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -51,7 +53,7 @@ router
 				throw err;
 			}
 		} else {
-			req.flash("register", error);
+			req.flash("register", error.array());
 			return res.redirect("/user/register");
 		}
 	});
