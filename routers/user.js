@@ -21,16 +21,6 @@ router
 	.post("/login", loginSubmit, (req, res) => {
 		const error = validationResult(req);
 		if (error.isEmpty()) {
-			// try {
-			// 	const {username, password} = req.body;
-			// 	const userFound = await User.findOne({where: {username}});
-			// 	if (await bcrypt.compare(password, userFound.password) === true) {
-			// 		return res.redirect("/user/");
-
-			// 	}
-			// } catch (err) {
-			// 	throw err;
-			// }
 			return res.redirect("/user/");
 		} else {
 			req.flash("login", error.array());

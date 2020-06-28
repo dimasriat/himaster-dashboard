@@ -3,8 +3,8 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
 exports.postSubmit = [
-	check("title", "title cannot be blank").exists(),
-	check("body", "note cannot be blank").exists(),
+	check("title", "title cannot be blank").not().isEmpty(),
+	check("body", "note cannot be blank").not().isEmpty(),
 ];
 
 exports.loginSubmit = [
@@ -22,16 +22,14 @@ exports.loginSubmit = [
 ];
 
 exports.registerSubmit = [
-	check("username", "username cannot be blank").exists(),
+	check("username", "username cannot be blank").not().isEmpty(),
 	body("username").custom(async (username) => {
 		const found = await User.findOne({ where: { username } });
-		return found
-			? Promise.reject("username has been taken")
-			: Promise.resolve();
+		if (!found) return Promise.reject("username has been taken");
 	}),
-	check("email", "email cannot be blank").exists(),
+	check("email", "email cannot be blank").not().isEmpty(),
 	check("email", "email are not valid").isEmail(),
-	check("password", "password cannot be blank").exists(),
+	check("password", "password cannot be blank").not().isEmpty(),
 	check("password", "password length must be 8 character minimal").isLength({
 		min: 8,
 	}),
@@ -39,7 +37,8 @@ exports.registerSubmit = [
 		"password2",
 		"password confirmation must have same value as your password"
 	)
-		.exists()
+		.not()
+		.isEmpty()
 		.custom((value, { req }) => value === req.body.password),
 ];
 
