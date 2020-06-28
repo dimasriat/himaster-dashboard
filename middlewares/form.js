@@ -18,6 +18,8 @@ exports.loginSubmit = [
 			found.password
 		);
 		if (!accepted) return Promise.reject("username or password is wrong");
+		req.session.userid = found.id;
+		req.session.isLoggedIn = true;
 	}),
 ];
 
@@ -25,7 +27,7 @@ exports.registerSubmit = [
 	check("username", "username cannot be blank").not().isEmpty(),
 	body("username").custom(async (username) => {
 		const found = await User.findOne({ where: { username } });
-		if (!found) return Promise.reject("username has been taken");
+		if (found) return Promise.reject("username has been taken");
 	}),
 	check("email", "email cannot be blank").not().isEmpty(),
 	check("email", "email are not valid").isEmail(),

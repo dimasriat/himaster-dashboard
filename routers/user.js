@@ -9,8 +9,25 @@ const bcrypt = require("bcryptjs");
 
 const User = require("../models/User");
 
-router.get("/", (req, res) => {
-	res.render("dashboard");
+router.get("/", async (req, res) => {
+	try {
+		if (req.session.isLoggedIn) {
+			const { username } = await User.findOne({
+				where: { id: req.session.userid },
+			});
+			res.render("dashboard", { msg: `Selamat malam ${username}!` });
+		} else {
+			res.render("dashboard", { msg: "koe sopo asu" });
+		}
+	} catch (err) {
+		console.error(err);
+		res.send(err);
+	}
+});
+
+router.get("/logout", (req, res) => {
+	req.session.destroy();
+	res.redirect("/user");
 });
 
 router
