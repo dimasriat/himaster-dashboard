@@ -4,10 +4,10 @@ const {
 	loginSubmit,
 	registerSubmit,
 	validationResult,
-} = require("../middlewares");
+} = require("../middlewares/form");
+const bcrypt = require("bcryptjs");
 
-// const User = require("../models/User");
-// router.get("/", (req, res) => res.send('holaaaa'))
+const User = require("../models/User");
 router.get("/", (req, res) => {
 	res.render("dashboard");
 });
@@ -32,12 +32,26 @@ router
 		const error = req.flash("register");
 		res.render("register", { error });
 	})
-	.post("/register", registerSubmit, (req, res) => {
-		const error = validationResult(req);
-		if (error.isEmpty()) {
-			return res.redirect("/user/login");
+	.post("/register", registerSubmit, async (req, res) => {
+		const error = validationResult(req).array();
+		const { username, password, email } = req.body;
+		if (error.length === 0) {
+			try {
+				const salt = await bcrypt.genSalt(10);
+				const hashedPassword = await bcrypt.hash(password, salt);
+
+				await User.create({
+					username,
+					password: hashedPassword,
+					email,
+				});
+
+				return res.redirect("/user/login");
+			} catch (err) {
+				throw err;
+			}
 		} else {
-			req.flash("register", error.array());
+			req.flash("register", error);
 			return res.redirect("/user/register");
 		}
 	});

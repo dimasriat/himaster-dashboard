@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
-const { postSubmit, validationResult } = require("../middlewares");
+const { postSubmit, validationResult } = require("../middlewares/form");
 
 router.get("/", async (req, res) => {
 	try {
