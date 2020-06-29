@@ -1,0 +1,41 @@
+:root {
+	--bg: rgb(165, 94, 234);
+	--nav: black;
+	--sec: white;
+	--sec-border: 1px solid black;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: "HVT", Arial, Helvetica, sans-serif;
+}
+
+@font-face {
+	font-family: "HVT";
+	src: url("/assets/fonts/font-regular.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "HVT";
+	src: url("/assets/fonts/font-bold.ttf") format("truetype");
+	font-weight: bold;
+	font-style: normal;
+}
+
+html {
+	width: 100%;
+	min-height: 100%;
+}
+
+body {
+	width: 100%;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+p {
+	text-align: justify
+}

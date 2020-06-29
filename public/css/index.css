@@ -1,0 +1,81 @@
+body {
+	background-color: var(--bg);
+}
+
+main {
+	margin: 0.25rem auto;
+	width: 50%;
+}
+
+nav,
+section,
+header,
+article {
+	padding: 0 0.5rem;
+	margin: 0.25rem 0;
+	border: var(--sec-border);
+	background-color: var(--sec);
+}
+
+.control {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+nav {
+	background-color: var(--nav);
+	display: flex;
+	justify-content: space-around;
+}
+
+nav a {
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+	margin: 0.25rem;
+}
+
+nav a:hover {
+	color: white;
+	font-weight: bold;
+	text-decoration: underline;
+	margin: 0.25rem;
+}
+
+form p {
+	width: 100%;
+	display: flex;
+}
+
+form p label {
+	width: 20%;
+}
+
+form p input {
+	width: 100%;
+}
+
+form p textarea {
+	width: 100%;
+	min-height: 6rem;
+}
+
+figure {
+	display: flex;
+	margin: 0;
+	padding: 1rem 0;
+}
+
+figcaption {
+	margin-left: 1rem;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.fakeimg {
+	width: 4rem;
+	height: 4rem;
+	background-color: var(--bg);
+	border: var(--sec-border);
+}
