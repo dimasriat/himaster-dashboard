@@ -18,6 +18,6 @@ router.get("/", AUTH["LOGGED_ONLY"], GET["DASHBOARD"]);
  * kemudian controller GET["LOGOUT"] untuk menghapus session dan mengarahkan ke halaman login
  * 
  */
-router.get("/", AUTH["BOTH"], GET["LOGOUT"]);
+router.get("/logout", AUTH["BOTH"], GET["LOGOUT"]);
 
 module.exports = router;

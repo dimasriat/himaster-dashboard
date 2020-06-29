@@ -1,3 +1,5 @@
+const User = require("../models/User");
+
 exports.GET = {
 	/**
 	 * --- DASHBOARD PAGE GET CONTROLLER ---
@@ -5,8 +7,15 @@ exports.GET = {
 	 * khusus yang sudah login, bisa mengakses http://.../user
 	 *
 	 */
-	DASHBOARD: (req, res) => {
-		res.render("dashboard");
+	DASHBOARD: async (req, res) => {
+		try {
+			const data = await User.findOne({
+				where: { id: req.session.userid },
+			});
+			res.render("dashboard", { data });
+		} catch (err) {
+			throw err;
+		}
 	},
 	/**
 	 * --- LOGOUT GET CONTROLLER ---

@@ -15,7 +15,7 @@ router.get("/", AUTH["BOTH"], GET["HOME_PAGE"]);
 /**
  * --- GET http://.../login ---
  * 
- * melewati middleware AUTH[BOTH] (tanpa autentikasi)
+ * melewati middleware AUTH["NOT_LOGGED_ONLY"] (khusus belum login)
  * kemudian controller GET["LOGIN_PAGE"] untuk diarahkan
  * 
  */
@@ -43,8 +43,8 @@ router.post(
 /**
  * --- GET http://.../register ---
  * 
- * melewati middleware AUTH[BOTH] (tanpa autentikasi)
- * kemudian controller GET["REGISTER"] untuk diarahkan
+ * melewati middleware AUTH["NOT_LOGGED_ONLY"] (khusus belum login)
+ * kemudian controller GET["REGISTER_PAGE"] untuk diarahkan
  * 
  */
 router.get("/register", AUTH["NOT_LOGGED_ONLY"], GET["REGISTER_PAGE"]);

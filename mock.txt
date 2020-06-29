@@ -9,3 +9,6 @@ VIEW
 /user/update-post
 /user/delete-post
 /user/settings
+
+
+kurang bikin flash alertnya
