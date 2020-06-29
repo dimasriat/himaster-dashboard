@@ -1,0 +1,11 @@
+VIEW
+/
+/login
+/register
+/user/[username]
+
+/user
+/user/new-post
+/user/update-post
+/user/delete-post
+/user/settings

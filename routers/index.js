@@ -1,90 +1,72 @@
 const express = require("express");
 const router = express.Router();
-const Post = require("../models/Post");
-const { postSubmit, validationResult } = require("../middlewares/form");
+const AUTH = require("../middlewares/auth");
+const FORM = require("../middlewares/form");
+const { GET, POST } = require("../controllers/index");
 
-router.get("/", async (req, res) => {
-	try {
-		const data = await Post.findAll();
-		res.render("read", { data });
-	} catch (err) {
-		throw err;
-	}
-});
-
-router
-	.get("/create", (req, res) => {
-		res.render("create", { error: [] });
-	})
-	.post("/create", postSubmit, async (req, res) => {
-		const postError = validationResult(req);
-		if (!postError.isEmpty()) {
-			return res.render("create", { error: postError.array() });
-		}
-		try {
-			const { title, body } = req.body;
-			await Post.create({ title, body });
-			res.redirect("/");
-		} catch (err) {
-			throw err;
-		}
-	});
-
-// bagian page update nih ditest lagi ada bug pas submit
-router.get("/update/:id", async (req, res) => {
-	try {
-		const data = await Post.findOne({
-			where: {
-				id: req.params.id,
-			},
-		});
-		if (data) {
-			res.render("update", { data, error: [] });
-		} else {
-			res.redirect("/");
-		}
-	} catch (err) {
-		throw err;
-	}
-});
-
-// ada bug di bagian update post tapi pas kosongan fieldnya
-// Cannot POST /update/
-router.post("/update/:id", postSubmit, async (req, res) => {
-	const postError = validationResult(req);
-	if (!postError.isEmpty()) {
-		return res.render("update", {
-			data: req.body,
-			error: postError.array(),
-		});
-	}
-	try {
-		const { title, body } = req.body;
-		await Post.update(
-			{ title, body },
-			{
-				where: {
-					id: req.params.id,
-				},
-			}
-		);
-		res.redirect("/");
-	} catch (err) {
-		throw err;
-	}
-});
-
-router.get("/delete/:id", async (req, res) => {
-	try {
-		await Post.destroy({
-			where: {
-				id: req.params.id,
-			},
-		});
-		res.redirect("/");
-	} catch (err) {
-		throw err;
-	}
-});
+/**
+ * --- GET http://.../ ---
+ * 
+ * melewati middleware AUTH[BOTH] (tanpa autentikasi)
+ * kemudian controller GET["HOMEPAGE"] untuk diarahkan
+ * 
+ */
+router.get("/", AUTH["BOTH"], GET["HOME_PAGE"]);
+/**
+ * --- GET http://.../login ---
+ * 
+ * melewati middleware AUTH[BOTH] (tanpa autentikasi)
+ * kemudian controller GET["LOGIN_PAGE"] untuk diarahkan
+ * 
+ */
+router.get("/login", AUTH["NOT_LOGGED_ONLY"], GET["LOGIN_PAGE"]);
+/**
+ * --- POST http://.../login ---
+ * 
+ * menjadi action setelah kita mengisi form login
+ * melewati 2 middleware sebelum mencapai controller
+ * 
+ * middleware #1: pengecekkan apakah sebelumnya user sudah login?
+ * kalo udah ya harus logout dulu baru bisa lanjut login lagi
+ * 
+ * middleware #2: pengecekkan isi formulir login apakah sudah cocok dan ada di dalam database?
+ * pengaturan session dilakukan di middleware, bukan di controller
+ * karena sekalian pas ngecek dapet useridnya di sessionnya
+ * 
+ */
+router.post(
+	"/login",
+	AUTH["NOT_LOGGED_ONLY"],
+	FORM["LOGIN_SUBMIT"],
+	POST["LOGIN_PAGE"]
+);
+/**
+ * --- GET http://.../register ---
+ * 
+ * melewati middleware AUTH[BOTH] (tanpa autentikasi)
+ * kemudian controller GET["REGISTER"] untuk diarahkan
+ * 
+ */
+router.get("/register", AUTH["NOT_LOGGED_ONLY"], GET["REGISTER_PAGE"]);
+/**
+ * --- POST http://.../register ---
+ * 
+ * menjadi action setelah kita mengisi form register
+ * melewati 2 middleware sebelum mencapai controller
+ * 
+ * middleware #1: pengecekkan apakah sebelumnya user sudah login?
+ * kalo udah ya harus logout dulu baru bisa lanjut register lagi
+ * 
+ * middleware #2: pengecekkan isi formulir register apakah sudah layak dimasukkan ke dalam database?
+ * jika sudah layak, maka data dimasukkan di dalam database di bagian controller, bukan di middleware
+ * setelah itu diarahkan ke http://.../login untuk masuk
+ * 
+ */
+router.post(
+	"/register",
+	AUTH["NOT_LOGGED_ONLY"],
+	FORM["REGISTER_SUBMIT"],
+	POST["REGISTER_PAGE"]
+);
 
 module.exports = router;

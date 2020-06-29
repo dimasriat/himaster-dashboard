@@ -1,40 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Dashboard</title>
-		<link rel="stylesheet" href="/assets/css/style.css" />
-	</head>
 
-	<body>
-		<div class="wrapper">
-			<%- include('components/header', {title: 'Login'}); %>
-			<%-	include('components/nav-user'); %>
-			<section>
-				<form action="/user/login" method="POST">
-					<p>
-						<input
-							type="text"
-							name="username"
-							placeholder="username"
-						/>
-					</p>
-					<p>
-						<input
-							type="password"
-							name="password"
-							placeholder="password"
-						/>
-					</p>
-					<input type="submit" value="login" />
-				</form>
-			</section>
-			<% if (error) { %> <% for (err of error) { %>
-			<div class="err">
-				<%= err.msg %>
-			</div>
-			<% }; %> <% }; %>
-		</div>
-	</body>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="/assets/css/init.css" />
+	<link rel="stylesheet" href="/assets/css/index.css" />
+</head>
+
+<body>
+	<main>
+		<header>
+			<h1>Login Page</h1>
+		</header>
+		<nav>
+			<a href="/">home</a>
+			<a href="/login">login</a>
+			<a href="/register">register</a>
+		</nav>
+		<section>
+			<h2>Login</h2>
+			<form method="POST" action="/login">
+				<p><label>username</label> <input type="text" name="username"/></p>
+				<p><label>password</label> <input type="password" name="password"/></p>
+				<p><input type="submit" value="login"/></p>
+			</form>
+		</section>
+	</main>
+</body>
+
 </html>

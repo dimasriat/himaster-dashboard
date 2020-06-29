@@ -1,21 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Dashboard</title>
-		<link rel="stylesheet" href="/assets/css/style.css" />
-	</head>
 
-	<body>
-		<div class="wrapper">
-			<%- include('components/header', {title: 'Login'}); %>
-			<%-	include('components/nav-user'); %>
-			<section>
-				<p>ini page dashboard</p>
-				<p>silakan login terlebih dahulu</p>
-				<p><%- msg %></p>
-			</section>
-		</div>
-	</body>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="/assets/css/init.css" />
+	<link rel="stylesheet" href="/assets/css/index.css" />
+</head>
+
+<body>
+	<main>
+		<header>
+			<h1>DASHBOARD</h1>
+		</header>
+		<nav>
+			<a href="/">home</a>
+			<a href="/login">login</a>
+			<a href="/register">register</a>
+		</nav>
+		<section>
+			<figure>
+				<figcaption>
+					<h3>dimasriat</h3>
+					<div>
+						<p>
+							Lorem ipsum, dolor sit amet consectetur
+							adipisicing elit. 
+						</p>
+						<p class="control">
+							<a href="/">home</a>
+							<a href="/login">login</a>
+							<a href="/register">register</a>
+						</p>
+					</div>
+				</figcaption>
+				<div class="fakeava"></div>
+			</figure>
+		</section>
+		<section>
+			<figure>
+				<div class="fakeimg"></div>
+				<figcaption>
+					<b>dimasriat</b>
+					<div>
+						<p>
+							Lorem ipsum, dolor sit amet consectetur
+							adipisicing elit. Inventore porro voluptate est
+							repellat consequatur beatae a laudantium illum
+							incidunt, molestiae minus odit quas nulla. Alias
+							voluptatum at non tenetur nisi? Lorem ipsum,
+							dolor sit amet consectetur adipisicing elit.
+							Inventore porro voluptate est repellat
+							consequatur beatae a laudantium illum incidunt,
+							molestiae minus odit quas nulla. Alias
+							voluptatum at non tenetur nisi?
+						</p>
+						<p>
+							Lorem ipsum, dolor sit amet consectetur
+							adipisicing elit. Inventore porro voluptate est
+							repellat consequatur beatae a laudantium illum
+							incidunt, molestiae minus odit quas nulla. Alias
+							voluptatum at non tenetur nisi? Lorem ipsum,
+							dolor sit amet consectetur adipisicing elit.
+							Inventore porro voluptate est repellat
+							consequatur beatae a laudantium illum incidunt,
+							molestiae minus odit quas nulla. Alias
+							voluptatum at non tenetur nisi?
+						</p>
+					</div>
+				</figcaption>
+			</figure>
+			<p class="control">
+				<a href="/">home</a>
+				<a href="/login">login</a>
+				<a href="/register">register</a>
+			</p>
+		</section>
+	</main>
+</body>
+
 </html>
