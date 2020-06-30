@@ -15,9 +15,12 @@ app.use(flash());
 app.use("/assets", express.static(`${__dirname}/public`));
 
 /**
- * 
  * JADI URUTANNYA ITU ROUTER --> MIDDLEWARE --> CONTROLLER
- * kayak saringan gituu
+ * 
+ * analoginya gini:
+ * 		router --> pemeta, kaya buat nyusun pola saringan, botolnya
+ * 		middleware --> penyaringnya
+ * 		controller --> output saringan terakhirnya
  * 
  */
 const indexRouter = require("./routers/index");

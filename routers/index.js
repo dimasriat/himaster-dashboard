@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const AUTH = require("../middlewares/auth");
 const FORM = require("../middlewares/form");
-const { GET, POST } = require("../controllers/index");
+const INDEX = require("../controllers/index");
 
 /**
  * --- GET http://.../ ---
@@ -11,7 +11,8 @@ const { GET, POST } = require("../controllers/index");
  * kemudian controller GET["HOMEPAGE"] untuk diarahkan
  * 
  */
-router.get("/", AUTH["BOTH"], GET["HOME_PAGE"]);
+router.get("/", AUTH["BOTH"], INDEX.GET["HOME_PAGE"]);
+
 /**
  * --- GET http://.../login ---
  * 
@@ -19,7 +20,8 @@ router.get("/", AUTH["BOTH"], GET["HOME_PAGE"]);
  * kemudian controller GET["LOGIN_PAGE"] untuk diarahkan
  * 
  */
-router.get("/login", AUTH["NOT_LOGGED_ONLY"], GET["LOGIN_PAGE"]);
+router.get("/login", AUTH["NOT_LOGGED_ONLY"], INDEX.GET["LOGIN_PAGE"]);
+
 /**
  * --- POST http://.../login ---
  * 
@@ -38,8 +40,9 @@ router.post(
 	"/login",
 	AUTH["NOT_LOGGED_ONLY"],
 	FORM["LOGIN_SUBMIT"],
-	POST["LOGIN_PAGE"]
+	INDEX.POST["LOGIN_PAGE"]
 );
+
 /**
  * --- GET http://.../register ---
  * 
@@ -47,7 +50,8 @@ router.post(
  * kemudian controller GET["REGISTER_PAGE"] untuk diarahkan
  * 
  */
-router.get("/register", AUTH["NOT_LOGGED_ONLY"], GET["REGISTER_PAGE"]);
+router.get("/register", AUTH["NOT_LOGGED_ONLY"], INDEX.GET["REGISTER_PAGE"]);
+
 /**
  * --- POST http://.../register ---
  * 
@@ -66,7 +70,7 @@ router.post(
 	"/register",
 	AUTH["NOT_LOGGED_ONLY"],
 	FORM["REGISTER_SUBMIT"],
-	POST["REGISTER_PAGE"]
+	INDEX.POST["REGISTER_PAGE"]
 );
 
 module.exports = router;

@@ -2,9 +2,13 @@ const { check, validationResult, body } = require("express-validator");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
+/**
+ * --- NEW POST SUBMIT MIDDLEWARE ---
+ * 
+ * yang dicek adalah form postbody
+ */
 exports.NEW_POST_SUBMIT = [
-	check("title", "title cannot be blank").not().isEmpty(),
-	check("body", "note cannot be blank").not().isEmpty(),
+	check("postbody", "post cannot be blank").not().isEmpty(),
 ];
 
 /**
@@ -37,7 +41,7 @@ exports.LOGIN_SUBMIT = [
  * middleware ini mengecek apakah data sudah cocok bisa dimasukkan ke dalam database
  * dan tentu saja tidak ada duplikat di database
  * 
- * sementara untuk input data ke database nya tetap dilakukan oleh ang controller
+ * sementara untuk input data ke database nya tetap dilakukan oleh sang controller
  * 
  */
 exports.REGISTER_SUBMIT = [

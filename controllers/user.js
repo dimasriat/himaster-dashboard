@@ -7,7 +7,7 @@ exports.GET = {
 	 * khusus yang sudah login, bisa mengakses http://.../user
 	 *
 	 */
-	DASHBOARD: async (req, res) => {
+	DASHBOARD_PAGE: async (req, res) => {
 		try {
 			const data = await User.findOne({
 				where: { id: req.session.userid },
@@ -17,6 +17,17 @@ exports.GET = {
 			throw err;
 		}
 	},
+	
+	/**
+	 * --- NEW POST PAGE GET CONTROLLER ---
+	 * 
+	 * halaman untuk membuat post baru
+	 * 
+	 */
+	NEW_POST_PAGE: (req, res) => {
+		res.render('new-post')
+	},
+
 	/**
 	 * --- LOGOUT GET CONTROLLER ---
 	 *
@@ -28,3 +39,9 @@ exports.GET = {
 		res.redirect("/login");
 	},
 };
+
+exports.POST = {
+	NEW_POST_PAGE: async (req, res) => {
+		
+	}
+}

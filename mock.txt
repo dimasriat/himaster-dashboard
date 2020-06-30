@@ -11,4 +11,14 @@ VIEW
 /user/settings
 
 
-kurang bikin flash alertnya
+bikin flash alert di views kalo formnya error [OK]
+bikin add post delete post
+bikin upload bio + avatar per user (pakai multer)
+add post tapi pake foto
+
+KENDALA
+	nama file bikin bingung ini indexnya middleware, router, controller, atau bahkan view? mungkin strukturnya di benerin lagi biar enak dibaca
+
+	sederhanakan alur pembuatan fungsi router, middleware, view, dan controller
+
+	sederhanakan alur pembuatan table baru

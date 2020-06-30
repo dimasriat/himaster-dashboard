@@ -7,7 +7,7 @@ const sequelize = new Sequelize("async_me", "root", null, {
 
 (async () => {
 	try {
-		const resetTable = false;
+		const resetTable = true;
 		await sequelize.sync({ force: resetTable });
 	} catch (err) {
 		throw err;

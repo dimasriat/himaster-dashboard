@@ -2,8 +2,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../utils/dbinit");
 
 const Post = sequelize.define("Post", {
-	title: DataTypes.STRING,
-	body: DataTypes.TEXT,
+	postbody: DataTypes.STRING,
 });
 
 module.exports = Post;

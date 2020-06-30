@@ -20,7 +20,7 @@ exports.GET = {
 	 */
 	LOGIN_PAGE: (req, res) => {
 		const error = req.flash("login");
-		res.render("login");
+		res.render("login", { error });
 	},
 	/**
 	 * --- REGISTER PAGE GET CONTROLLER ---
@@ -71,6 +71,7 @@ exports.POST = {
 	 */
 	REGISTER_PAGE: async (req, res) => {
 		const error = validationResult(req);
+
 		if (error.isEmpty()) {
 			try {
 				const { username, password, email } = req.body;

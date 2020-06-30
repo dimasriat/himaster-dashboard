@@ -27,6 +27,9 @@
 				<p><input type="submit" value="login"/></p>
 			</form>
 		</section>
+		<% for (err of error) { %>
+			<div class="err"><%=err.msg%></div>
+		<% } %>
 	</main>
 </body>
 
