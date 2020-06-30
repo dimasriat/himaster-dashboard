@@ -1,10 +1,10 @@
 const { check, validationResult, body } = require("express-validator");
-const User = require("../models/User");
+const { User } = require("../models/");
 const bcrypt = require("bcryptjs");
 
 /**
  * --- NEW POST SUBMIT MIDDLEWARE ---
- * 
+ *
  * yang dicek adalah form postbody
  */
 exports.NEW_POST_SUBMIT = [
@@ -13,12 +13,12 @@ exports.NEW_POST_SUBMIT = [
 
 /**
  * --- LOGIN SUBMIT MIDDLEWARE ---
- * 
+ *
  * pengaturan session dilakukan di sini sekaligus mengecek apakah user + password cocok
  * jadi setelah melewati middleware ini, langusng sudah dianggap login
  * kemudian akan diarahkan menuju halaman yang dikhususkan untuk pengguna login
- * 
-*/
+ *
+ */
 exports.LOGIN_SUBMIT = [
 	check("username", "username cannot be blank").not().isEmpty(),
 	check("password", "password cannot be blank").not().isEmpty(),
@@ -37,12 +37,12 @@ exports.LOGIN_SUBMIT = [
 
 /**
  * --- REGISTER SUBMIT MIDDLEWARE ---
- * 
+ *
  * middleware ini mengecek apakah data sudah cocok bisa dimasukkan ke dalam database
  * dan tentu saja tidak ada duplikat di database
- * 
+ *
  * sementara untuk input data ke database nya tetap dilakukan oleh sang controller
- * 
+ *
  */
 exports.REGISTER_SUBMIT = [
 	check("username", "username cannot be blank").not().isEmpty(),

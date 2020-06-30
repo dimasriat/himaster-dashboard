@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const AUTH = require("../middlewares/auth");
+const FORM = require("../middlewares/form");
 const USER = require("../controllers/user");
 
 /**

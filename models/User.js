@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../utils/dbinit");
 
-const User = sequelize.define("User", {
+const User = sequelize.define("user", {
 	username: {
 		type: DataTypes.STRING,
 		unique: true,
