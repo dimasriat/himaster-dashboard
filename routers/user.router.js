@@ -17,15 +17,6 @@ const USER = require("../controllers/user.controller");
 router.get("/", AUTH["LOGGED_ONLY"], USER.GET["DASHBOARD_PAGE"]);
 
 /**
- * --- GET http://.../user/username ---
- *
- * melewati middleware AUTH["LOGGED_ONLY"] (untuk mengecek apakah user sudah login)
- * kemudian controller GET["PROFILE_PAGE"] untuk diarahkan ke halaman dashboard
- *
- */
-router.get("/:username", AUTH["BOTH"], USER.GET["PROFILE_PAGE"]);
-
-/**
  * --- GET http://.../user/new-post ---
  *
  * mengarahkan ke halaman untuk membuat post baru
@@ -56,5 +47,14 @@ router.post(
  *
  */
 router.get("/logout", AUTH["BOTH"], USER.GET["LOGOUT"]);
+
+/**
+ * --- GET http://.../user/username ---
+ *
+ * melewati middleware AUTH["LOGGED_ONLY"] (untuk mengecek apakah user sudah login)
+ * kemudian controller GET["PROFILE_PAGE"] untuk diarahkan ke halaman dashboard
+ *
+ */
+router.get("/:username", AUTH["BOTH"], USER.GET["PROFILE_PAGE"]);
 
 module.exports = router;

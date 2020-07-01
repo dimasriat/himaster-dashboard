@@ -24,5 +24,19 @@ KENDALA
 	sederhanakan alur pembuatan table baru
 
 TODO
+	reserved word /user/logout error 
 	flash di new-post
-	merapikan nama file sesuai kategorinya --> misal models/user.js --> models/user.model.js
+	buat settings tiap profile: tambahin foto profil, nama lengkap, dan bio, serta link ke website / sosmed
+	tambahin delete + update post
+	post = judul + isi
+	halaman timeline cuma nampilin judul + sedikit isi ntar di readmore
+	tambahkan gambar di post (1 aja)
+	tambahin sistem forget password, password confirmation
+
+	
+TODO SELESAI
+	merapikan nama file sesuai kategorinya --> misal models/user.js --> models/user.model.js [OK]
+
+THOUGTS
+	1 juli:
+	oalah jadi ini toh kelebihannya react: bikin htmlnya berdasarkan komponen2 gitu enak banget ga pusing jadinya
