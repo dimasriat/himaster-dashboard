@@ -23,10 +23,13 @@ app.use("/assets", express.static(`${__dirname}/public`));
  * 		controller --> output saringan terakhirnya
  * 
  */
-const indexRouter = require("./routers/index");
+const indexRouter = require("./routers/index.router");
 app.use("/", indexRouter);
 
-const userRouter = require("./routers/user");
+const userRouter = require("./routers/user.router");
 app.use("/user", userRouter);
+
+const testRouter = require('./routers/test.router')
+app.use('/test', testRouter)
 
 app.listen(8000, () => console.log("server is running at port 8000"));

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dashboard</title>
+		<link rel="stylesheet" href="/assets/css/init.css" />
+		<link rel="stylesheet" href="/assets/css/index.css" />
+	</head>
+
+	<body>
+		<main>
+			<header>
+				<h1>Judul Page</h1>
+			</header>
+			<nav>
+				<a href="/user">timeline</a>
+				<a href="/user/<%= username %>">profile</a>
+				<a href="/user/settings">settings</a>
+				<a href="/user/logout">logout</a>
+			</nav>
+			<section>
+				<h2>New Post</h2>
+				<form method="POST" action="/user/new-post">
+					<p>
+						<textarea
+							name="postbody"
+							placeholder="type here..."
+						></textarea>
+					</p>
+					<p><input type="submit" value="new post" /></p>
+				</form>
+			</section>
+			<% for (post of posts) { %>
+			<section>
+				<figure>
+					<div class="fakeimg"></div>
+					<figcaption>
+						<b><%= post.user.username %></b>
+						<div>
+							<p>
+								<%= post.postbody %>
+							</p>
+						</div>
+					</figcaption>
+				</figure>
+				<p class="control">
+					<a href="/">like</a>
+					<a href="/login">comment</a>
+					<a href="/register">share</a>
+				</p>
+			</section>
+			<% } %>
+		</main>
+	</body>
+</html>

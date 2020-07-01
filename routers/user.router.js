@@ -1,17 +1,29 @@
 const express = require("express");
 const router = express.Router();
-const AUTH = require("../middlewares/auth");
-const FORM = require("../middlewares/form");
-const USER = require("../controllers/user");
+
+// middlewares
+const AUTH = require("../middlewares/auth.middleware");
+const FORM = require("../middlewares/form.middleware");
+// controllers
+const USER = require("../controllers/user.controller");
 
 /**
  * --- GET http://.../user ---
  *
  * melewati middleware AUTH["LOGGED_ONLY"] (untuk mengecek apakah user sudah login)
- * kemudian controller GET["DASHBOARD"] untuk diarahkan ke halaman dashboard
+ * kemudian controller GET["DASHBOARD_PAGE"] untuk diarahkan ke halaman dashboard
  *
  */
 router.get("/", AUTH["LOGGED_ONLY"], USER.GET["DASHBOARD_PAGE"]);
+
+/**
+ * --- GET http://.../user/username ---
+ *
+ * melewati middleware AUTH["LOGGED_ONLY"] (untuk mengecek apakah user sudah login)
+ * kemudian controller GET["PROFILE_PAGE"] untuk diarahkan ke halaman dashboard
+ *
+ */
+router.get("/:username", AUTH["BOTH"], USER.GET["PROFILE_PAGE"]);
 
 /**
  * --- GET http://.../user/new-post ---

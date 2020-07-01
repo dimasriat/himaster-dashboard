@@ -1,6 +1,6 @@
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
-const {User} = require("../models/");
+const { User, Post } = require("../models/index.model");
 
 exports.GET = {
 	/**
@@ -9,8 +9,17 @@ exports.GET = {
 	 * gaada yang spesial sih dari ini, sebenernya cuma ngarahin ke landing page aja
 	 *
 	 */
-	HOME_PAGE: (req, res) => {
-		res.render("index");
+	HOME_PAGE: async (req, res) => {
+		try {
+			const posts = await Post.findAll({
+				include: [User],
+				order: [["updatedAt", "DESC"]],
+			});
+			console.log(JSON.stringify(posts, null, 2));
+			res.render("no-auth/landing", { posts });
+		} catch (err) {
+			throw err;
+		}
 	},
 	/**
 	 * --- LOGIN PAGE GET CONTROLLER ---
@@ -20,7 +29,7 @@ exports.GET = {
 	 */
 	LOGIN_PAGE: (req, res) => {
 		const error = req.flash("login");
-		res.render("login", { error });
+		res.render("no-auth/login", { error });
 	},
 	/**
 	 * --- REGISTER PAGE GET CONTROLLER ---
@@ -30,7 +39,7 @@ exports.GET = {
 	 */
 	REGISTER_PAGE: (req, res) => {
 		const error = req.flash("register");
-		res.render("register", { error });
+		res.render("no-auth/register", { error });
 	},
 };
 

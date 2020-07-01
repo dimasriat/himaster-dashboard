@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../utils/dbinit");
+const sequelize = require("../config/sequelize.config");
 
 const Post = sequelize.define("post", {
 	postbody: DataTypes.STRING,

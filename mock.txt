@@ -22,3 +22,7 @@ KENDALA
 	sederhanakan alur pembuatan fungsi router, middleware, view, dan controller
 
 	sederhanakan alur pembuatan table baru
+
+TODO
+	flash di new-post
+	merapikan nama file sesuai kategorinya --> misal models/user.js --> models/user.model.js

@@ -1,4 +1,4 @@
-const { User, Post } = require("../models/");
+const { User, Post } = require("../models/index.model");
 
 exports.GET = {
 	/**
@@ -9,11 +9,41 @@ exports.GET = {
 	 */
 	DASHBOARD_PAGE: async (req, res) => {
 		try {
-			const data = await User.findOne({
-				where: { id: req.session.userid },
-				include: ["posts"],
+			const posts = await Post.findAll({
+				include: [User],
+				order: [["updatedAt", "DESC"]],
 			});
-			res.render("dashboard", { data });
+			console.log(JSON.stringify(posts, null, 2));
+			const { username } = req.session;
+			res.render("with-auth/timeline", { posts, username });
+		} catch (err) {
+			throw err;
+		}
+	},
+
+	/**
+	 * --- PROFILE PAGE GET CONTROLLER ---
+	 *
+	 * khusus yang sudah login, bisa mengakses http://.../user/username
+	 *
+	 */
+	PROFILE_PAGE: async (req, res) => {
+		const { username } = req.params;
+		try {
+			const data = await User.findOne({
+				where: {
+					username,
+				},
+				include: [
+					{
+						model: Post,
+						include: [User],
+					},
+				],
+				order: [["updatedAt", "DESC"]],
+			});
+			const { posts } = data;
+			res.render("with-auth/profile", { posts, data });
 		} catch (err) {
 			throw err;
 		}
@@ -29,7 +59,7 @@ exports.GET = {
 		const data = await Post.findAll({
 			where: { userId: req.session.userid },
 		});
-		res.render("new-post", { data });
+		res.render("with-auth/new-post", { data });
 	},
 
 	/**

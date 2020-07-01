@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const AUTH = require("../middlewares/auth");
-const FORM = require("../middlewares/form");
-const INDEX = require("../controllers/index");
+const AUTH = require("../middlewares/auth.middleware");
+const FORM = require("../middlewares/form.middleware");
+const INDEX = require("../controllers/index.controller");
 
 /**
  * --- GET http://.../ ---

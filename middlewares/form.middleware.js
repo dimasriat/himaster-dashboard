@@ -1,5 +1,5 @@
 const { check, validationResult, body } = require("express-validator");
-const { User } = require("../models/");
+const { User } = require("../models/index.model");
 const bcrypt = require("bcryptjs");
 
 /**
@@ -31,6 +31,7 @@ exports.LOGIN_SUBMIT = [
 		);
 		if (!accepted) return Promise.reject("username or password is wrong");
 		req.session.userid = found.id;
+		req.session.username = found.username;
 		req.session.isLoggedIn = true;
 	}),
 ];

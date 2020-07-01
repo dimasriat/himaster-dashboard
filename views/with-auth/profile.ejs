@@ -37,12 +37,12 @@
 					<div class="fakeava"></div>
 				</figure>
 			</section>
-			<% for (post of data.posts) { %>
+			<% for (post of posts) { %>
 			<section>
 				<figure>
 					<div class="fakeimg"></div>
 					<figcaption>
-						<b><%=data.username%></b>
+						<b><%= post.user.username %></b>
 						<div>
 							<p>
 								<%= post.postbody %>
@@ -51,9 +51,9 @@
 					</figcaption>
 				</figure>
 				<p class="control">
-					<a href="/">home</a>
-					<a href="/login">login</a>
-					<a href="/register">register</a>
+					<a href="/">like</a>
+					<a href="/login">comment</a>
+					<a href="/register">share</a>
 				</p>
 			</section>
 			<% } %>
