@@ -13,33 +13,46 @@
 			<header>
 				<h1>Judul Page</h1>
 			</header>
-			<nav>
-				<a href="/user">timeline</a>
-				<a href="/user/<%= username %>">profile</a>
-				<a href="/user/settings">settings</a>
-				<a href="/user/logout">logout</a>
-			</nav>
+			<%- include('components/navbar', {username}) %>
 			<section>
 				<h2>New Post</h2>
 				<form method="POST" action="/user/new-post">
 					<p>
+						<input type="text" placeholder="title" name="title" />
+					</p>
+					<p>
 						<textarea
-							name="postbody"
+							name="body"
 							placeholder="type here..."
 						></textarea>
 					</p>
 					<p><input type="submit" value="new post" /></p>
 				</form>
 			</section>
+			<% for (err of error) { %>
+			<div class="err"><%= err.msg %></div>
+			<% } %>
 			<% for (post of posts) { %>
 			<section>
 				<figure>
+					<% if (post.user.avatar) { %>
+					<div
+						class="fakeimg"
+						style="
+							background-image: url('/assets/upload/<%=post.user.avatar%>');
+						"
+					></div>
+					<% } else { %>
 					<div class="fakeimg"></div>
+					<% } %>
 					<figcaption>
-						<b><%= post.user.username %></b>
+						<a href="/user/<%= post.user.username %>"
+							><b>@<%= post.user.username %></b></a
+						>
 						<div>
+							<h2><%= post.title %></h2>
 							<p>
-								<%= post.postbody %>
+								<%= post.body %>
 							</p>
 						</div>
 					</figcaption>

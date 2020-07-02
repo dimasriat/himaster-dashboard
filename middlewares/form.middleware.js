@@ -8,7 +8,11 @@ const bcrypt = require("bcryptjs");
  * yang dicek adalah form postbody
  */
 exports.NEW_POST_SUBMIT = [
-	check("postbody", "post cannot be blank").not().isEmpty(),
+	check("title", "title cannot be blank").not().isEmpty(),
+	check("body", "post cannot be blank").not().isEmpty(),
+];
+exports.BASIC_SETTINGS_SUBMIT = [
+	check("bio", "bio cannot be blank").not().isEmpty(),
 ];
 
 /**

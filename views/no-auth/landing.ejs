@@ -27,19 +27,24 @@
 				</p>
 			</article>
 			<% for (post of posts) { %>
-				<section>
-					<figure>
-						<div class="fakeimg"></div>
-						<figcaption>
-							<b><%=post.user.username%></b>
-							<div>
-								<p>
-									<%= post.postbody %>
-								</p>
-							</div>
-						</figcaption>
-					</figure>
-				</section>
+			<section>
+				<figure>
+					<% if (post.user.avatar) { %>
+						<div class="fakeava" style="background-image: url('/assets/upload/<%=post.user.avatar%>');"></div>
+						<% } else { %>
+						<div class="fakeava"></div>
+						<% } %>
+					<figcaption>
+						<b><%= post.user.username %></b>
+						<div>
+							<h2><%= post.title %></h2>
+							<p>
+								<%= post.body %>
+							</p>
+						</div>
+					</figcaption>
+				</figure>
+			</section>
 			<% } %>
 		</main>
 	</body>

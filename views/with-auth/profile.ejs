@@ -13,19 +13,14 @@
 			<header>
 				<h1>DASHBOARD</h1>
 			</header>
-			<nav>
-				<a href="/">home</a>
-				<a href="/user">dashboard</a>
-				<a href="/user/new-post">new post</a>
-				<a href="/user/logout">logout</a>
-			</nav>
+			<%- include('./components/navbar', {username: username}) %>
 			<section>
 				<figure>
 					<figcaption>
 						<h3><%= data.username %></h3>
 						<div>
 							<p>
-								<%= data.email %>
+								<%= data.bio %>
 							</p>
 							<p class="control">
 								<a href="/">home</a>
@@ -34,18 +29,39 @@
 							</p>
 						</div>
 					</figcaption>
+					<% if (data.avatar) { %>
+					<div
+						class="fakeava"
+						style="
+							background-image: url('/assets/upload/<%=data.avatar%>');
+						"
+					></div>
+					<% } else { %>
 					<div class="fakeava"></div>
+					<% } %>
 				</figure>
 			</section>
 			<% for (post of posts) { %>
 			<section>
 				<figure>
+					<% if (post.user.avatar) { %>
+					<div
+						class="fakeimg"
+						style="
+							background-image: url('/assets/upload/<%=post.user.avatar%>');
+						"
+					></div>
+					<% } else { %>
 					<div class="fakeimg"></div>
+					<% } %>
 					<figcaption>
-						<b><%= post.user.username %></b>
+						<a href="/user/<%= post.user.username %>"
+							><b>@<%= post.user.username %></b></a
+						>
 						<div>
+							<h2><%= post.title %></h2>
 							<p>
-								<%= post.postbody %>
+								<%= post.body %>
 							</p>
 						</div>
 					</figcaption>

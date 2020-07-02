@@ -4,6 +4,7 @@ const router = express.Router();
 // middlewares
 const AUTH = require("../middlewares/auth.middleware");
 const FORM = require("../middlewares/form.middleware");
+const UPLOAD = require("../middlewares/upload.middleware");
 // controllers
 const USER = require("../controllers/user.controller");
 
@@ -17,15 +18,6 @@ const USER = require("../controllers/user.controller");
 router.get("/", AUTH["LOGGED_ONLY"], USER.GET["DASHBOARD_PAGE"]);
 
 /**
- * --- GET http://.../user/new-post ---
- *
- * mengarahkan ke halaman untuk membuat post baru
- *
- * logged only
- */
-router.get("/new-post", AUTH["LOGGED_ONLY"], USER.GET["NEW_POST_PAGE"]);
-
-/**
  * --- POST http://.../user/new-post ---
  *
  * mengarahkan ke halaman untuk membuat post baru
@@ -36,7 +28,29 @@ router.post(
 	"/new-post",
 	FORM["NEW_POST_SUBMIT"],
 	AUTH["LOGGED_ONLY"],
-	USER.POST["NEW_POST_PAGE"]
+	USER.POST["NEW_POST_HANDLER"]
+);
+
+/**
+ * --- GET http://.../user/settings ---
+ *
+ * merupakan halaman untuk mengganti profil
+ * melewati autentikasi (harus sudah login)
+ *
+ */
+router.get("/settings", AUTH["LOGGED_ONLY"], USER.GET["SETTINGS_PAGE"]);
+
+/**
+ * --- POST http://.../user/settings/basic-settings ---
+ * 
+ * merupakan bagian submit basic settings di pengaturan user
+ */
+router.post(
+	"/settings/basic-settings",
+	AUTH["LOGGED_ONLY"],
+	UPLOAD["AVATAR"],
+	// FORM["BASIC_SETTINGS_SUBMIT"],
+	USER.POST["BASIC_SETTINGS_HANDLER"]
 );
 
 /**
