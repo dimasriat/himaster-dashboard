@@ -24,3 +24,14 @@
 	✅ middleware: body-parser + multer
 	❌ req.body --> validator error
 	✅ req.files
+
+##	Skema Database
+1. user adalah model himaster yang aktif tahun itu (misal himaster_alpha) dengan tahun (misal 2020)
+1. user memiliki relationship hasOne dengan about
+1. user memiliki relationship hasMany dengan event, photo, person
+1. team memiliki hubungan hasMany dengan person
+1. gallery memiliki hubungan hasMany dengan photo
+
+kepikiran ide tiap person bisa jualan di situ atau bikin blog kayaknya seru banget anjing bikin platform dongg :"""D
+
+ntar bisa buat portofolioooo kerennnn anjingggg

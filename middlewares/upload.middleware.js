@@ -6,6 +6,6 @@ const multer = require("multer");
  * mengambil isi fields 'avatar' di form enctype="multipart/form-data"
  * lalu menaruh filenya di req.files.avatar = [file]
  */
-exports.AVATAR = multer({ dest: `${__dirname}/../public/upload` }).fields([
-	{ name: "avatar", maxCount: 1 },
+exports.LOGO = multer({ dest: `${__dirname}/../public/upload/images` }).fields([
+	{ name: "logo", maxCount: 1 },
 ]);

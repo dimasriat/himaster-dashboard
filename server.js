@@ -23,10 +23,11 @@ app.use("/assets", express.static(`${__dirname}/public`));
  * 		controller --> output saringan terakhirnya
  *
  */
-const indexRouter = require("./routers/index.router");
-app.use("/", indexRouter);
-const userRouter = require("./routers/user.router");
-app.use("/user", userRouter);
+// const indexRouter = require("./routers/index.router");
+// app.use("/", indexRouter);
+// const adminRouter = require("./routers/admin.router");
+// app.use("/admin", adminRouter);
+app.use("/", require("./routers/test.router"));
 
 app.listen(8000, () => console.log("server is running at port 8000"));
 
@@ -66,7 +67,7 @@ app.listen(8000, () => console.log("server is running at port 8000"));
  *
  * apalagi kalo kamu paham penggunaan model database, kamu bisa membuat apapun yang kamu inginkan,
  * seperti kemampuan user posting, like + comment, dan pembagian jenis-jenis admin,
- * kemampuan upload file, search isi databse, 
+ * kemampuan upload file, search isi databse,
  *
  * ya... kamu bisa membuat apapun yang kamu inginkan...
  * mau itu platform blogmu sendiri, e commerce, freemium course, todo app kompleks, dlll anjing gokil banget
@@ -75,12 +76,12 @@ app.listen(8000, () => console.log("server is running at port 8000"));
  * kamu bisa memenangkan lomba apapun,
  * kamu bisa melayani pencari freelance manapun,
  * dan kamu bisa membuat usahamu sendiri.
- * 
- * dan hal yang paling menggembirakan adalah, kamu bakal dibayar gede, 
+ *
+ * dan hal yang paling menggembirakan adalah, kamu bakal dibayar gede,
  * sehingga kamu bisa mencapai tujuanmu: membantu ekonomi ibu, upgrade penampilan, bucin, dll bantu orang
  *
  * nggak level kamu sama wordpress rendahan.
- * 
+ *
  * ini memang sangat rumit, tapi kamu harus tahan!
  * soalnya imbalannya gede bangett
  *
@@ -108,7 +109,7 @@ app.listen(8000, () => console.log("server is running at port 8000"));
  * apalagi dia pakainya php, udah basi broo,
  * terus juga kekuatanmu dibanding wordpress itu adalah kamu bisa membuat sesuatu
  * yang wordpress nggak bisa buat
- * 
+ *
  * kamu bahkan bisa membuat wordpressmu sendiri
  *
  */

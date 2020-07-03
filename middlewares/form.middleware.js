@@ -1,5 +1,5 @@
 const { check, validationResult, body } = require("express-validator");
-const { User } = require("../models/index.model");
+const { Admin } = require("../models/index.model");
 const bcrypt = require("bcryptjs");
 
 /**
@@ -27,14 +27,14 @@ exports.LOGIN_SUBMIT = [
 	check("username", "username cannot be blank").not().isEmpty(),
 	check("password", "password cannot be blank").not().isEmpty(),
 	body("username").custom(async (username, { req }) => {
-		const found = await User.findOne({ where: { username } });
+		const found = await Admin.findOne({ where: { username } });
 		if (!found) return Promise.reject("username or password is wrong");
 		const accepted = await bcrypt.compare(
 			req.body.password,
 			found.password
 		);
 		if (!accepted) return Promise.reject("username or password is wrong");
-		req.session.userid = found.id;
+		req.session.adminId = found.id;
 		req.session.username = found.username;
 		req.session.isLoggedIn = true;
 	}),
@@ -52,7 +52,7 @@ exports.LOGIN_SUBMIT = [
 exports.REGISTER_SUBMIT = [
 	check("username", "username cannot be blank").not().isEmpty(),
 	body("username").custom(async (username) => {
-		const found = await User.findOne({ where: { username } });
+		const found = await Admin.findOne({ where: { username } });
 		if (found) return Promise.reject("username has been taken");
 	}),
 	check("email", "email cannot be blank").not().isEmpty(),

@@ -18,7 +18,7 @@ const AUTH = {
 	 * 
 	 */
 	NOT_LOGGED_ONLY: (req, res, next) => {
-		if (req.session.isLoggedIn) return res.redirect("/user");
+		if (req.session.isLoggedIn) return res.redirect("/admin");
 		next();
 	},
 	/**
