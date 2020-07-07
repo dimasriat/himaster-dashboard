@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="/assets/css/init.css" />
+	<link rel="stylesheet" href="/assets/css/index.css" />
+</head>
+
+<body>
+	<main>
+		<header>
+			<h1>Judul Page</h1>
+		</header>
+		<%- include('components/admin-navbar') %>
+		<section>
+			<h2>About Page</h2>
+			<form action="/admin" method="POST" enctype="multipart/form-data">
+				<p><label>Title</label> <input type="text" name="title" value="<%= about.title %>"/></p>
+				<p><label>Short Description</label><textarea name="subtitle"><%= about.subtitle %></textarea></p>
+				<p><label>Visi</label><textarea name="visi"><%= about.visi %></textarea></p>
+				<p><label>Misi</label><textarea  name="misi"><%= about.misi %></textarea></p>
+				<p><label>Logo</label> <input type="file" name="logo" /></p>
+				<p><label>Filosofi Logo</label><textarea  name="filosofi"><%= about.filosofi %></textarea></p>
+				<p><input type="submit" value="update"/></p>
+			</form>
+		</section>
+	</main>
+</body>
+
+</html>

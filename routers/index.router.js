@@ -1,76 +1,75 @@
 const express = require("express");
 const router = express.Router();
-const AUTH = require("../middlewares/auth.middleware");
+const { validationResult } = require("express-validator");
+
+const { Admin, About } = require("../models/index.model");
+const bcrypt = require("bcryptjs");
+
 const FORM = require("../middlewares/form.middleware");
-const INDEX = require("../controllers/index.controller");
+const AUTH = require("../middlewares/auth.middleware");
 
-/**
- * --- GET http://.../ ---
- * 
- * melewati middleware AUTH[BOTH] (tanpa autentikasi)
- * kemudian controller GET["HOMEPAGE"] untuk diarahkan
- * 
- */
-router.get("/", AUTH["BOTH"], INDEX.GET["HOME_PAGE"]);
+const fs = require("fs");
+const path = require("path");
 
-/**
- * --- GET http://.../login ---
- * 
- * melewati middleware AUTH["NOT_LOGGED_ONLY"] (khusus belum login)
- * kemudian controller GET["LOGIN_PAGE"] untuk diarahkan
- * 
- */
-router.get("/login", AUTH["NOT_LOGGED_ONLY"], INDEX.GET["LOGIN_PAGE"]);
+const fs_rename = (x, y) =>
+	new Promise((resolve) => {
+		fs.rename(x, y, () => resolve());
+	});
 
-/**
- * --- POST http://.../login ---
- * 
- * menjadi action setelah kita mengisi form login
- * melewati 2 middleware sebelum mencapai controller
- * 
- * middleware #1: pengecekkan apakah sebelumnya user sudah login?
- * kalo udah ya harus logout dulu baru bisa lanjut login lagi
- * 
- * middleware #2: pengecekkan isi formulir login apakah sudah cocok dan ada di dalam database?
- * pengaturan session dilakukan di middleware, bukan di controller
- * karena sekalian pas ngecek dapet useridnya di sessionnya
- * 
- */
+router.get("/", AUTH["BOTH"], async (req, res) => {
+	try {
+		const { id } = await Admin.findOne({
+			where: { year: "2020" },
+		});
+		const about = await About.findOne({
+			where: {
+				adminId: id,
+			},
+		});
+		console.log(JSON.stringify(await About.findAll(), null, 2));
+		res.render("test/index", { about });
+	} catch (err) {
+		console.error(err);
+	}
+});
+router.get("/about", AUTH["BOTH"], async (req, res) => {
+	try {
+		const { id } = await Admin.findOne({
+			where: { year: "2020" },
+		});
+		const about = await About.findOne({
+			where: {
+				adminId: id,
+			},
+		});
+		res.render("test/about", { about });
+	} catch (err) {
+		console.error(err);
+	}
+});
+router.get("/event", AUTH["BOTH"], (req, res) => res.render("test/event"));
+router.get("/gallery", AUTH["BOTH"], (req, res) => res.render("test/gallery"));
+router.get("/team", AUTH["BOTH"], (req, res) => res.render("test/team"));
+router.get("/login", AUTH["NOT_LOGGED_ONLY"], (req, res) =>
+	res.render("test/login")
+);
 router.post(
 	"/login",
 	AUTH["NOT_LOGGED_ONLY"],
 	FORM["LOGIN_SUBMIT"],
-	INDEX.POST["LOGIN_PAGE"]
-);
-
-/**
- * --- GET http://.../register ---
- * 
- * melewati middleware AUTH["NOT_LOGGED_ONLY"] (khusus belum login)
- * kemudian controller GET["REGISTER_PAGE"] untuk diarahkan
- * 
- */
-router.get("/register", AUTH["NOT_LOGGED_ONLY"], INDEX.GET["REGISTER_PAGE"]);
-
-/**
- * --- POST http://.../register ---
- * 
- * menjadi action setelah kita mengisi form register
- * melewati 2 middleware sebelum mencapai controller
- * 
- * middleware #1: pengecekkan apakah sebelumnya user sudah login?
- * kalo udah ya harus logout dulu baru bisa lanjut register lagi
- * 
- * middleware #2: pengecekkan isi formulir register apakah sudah layak dimasukkan ke dalam database?
- * jika sudah layak, maka data dimasukkan di dalam database di bagian controller, bukan di middleware
- * setelah itu diarahkan ke http://.../login untuk masuk
- * 
- */
-router.post(
-	"/register",
-	AUTH["NOT_LOGGED_ONLY"],
-	FORM["REGISTER_SUBMIT"],
-	INDEX.POST["REGISTER_PAGE"]
+	(req, res) => {
+		const error = validationResult(req);
+		if (error.isEmpty()) {
+			res.redirect("/admin");
+		} else {
+			req.flash("login", error.array());
+			const err = req
+				.flash("login")
+				.map((item) => `<p>${item.msg}</p>`)
+				.join("");
+			res.send(err);
+		}
+	}
 );
 
 module.exports = router;

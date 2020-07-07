@@ -12,24 +12,17 @@
 <body>
 	<main>
 		<header>
-			<h1>Login Page</h1>
+			<h1>Judul Page</h1>
 		</header>
-		<nav>
-			<a href="/">home</a>
-			<a href="/login">login</a>
-			<a href="/register">register</a>
-		</nav>
+		<%- include('components/navbar') %>
 		<section>
 			<h2>Login</h2>
 			<form method="POST" action="/login">
 				<p><label>username</label> <input type="text" name="username"/></p>
 				<p><label>password</label> <input type="password" name="password"/></p>
-				<p><input type="submit" value="login"/></p>
+				<p><input type="submit" /></p>
 			</form>
 		</section>
-		<% for (err of error) { %>
-			<div class="err"><%= err.msg %></div>
-		<% } %>
 	</main>
 </body>
 

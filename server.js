@@ -27,7 +27,8 @@ app.use("/assets", express.static(`${__dirname}/public`));
 // app.use("/", indexRouter);
 // const adminRouter = require("./routers/admin.router");
 // app.use("/admin", adminRouter);
-app.use("/", require("./routers/test.router"));
+app.use("/", require("./routers/index.router"));
+app.use("/admin", require("./routers/admin.router"));
 
 app.listen(8000, () => console.log("server is running at port 8000"));
 

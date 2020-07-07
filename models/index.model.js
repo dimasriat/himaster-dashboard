@@ -5,6 +5,7 @@ const Admin = require("./admin.model");
 const About = require("./about.model");
 const Event = require("./event.model");
 // const Photo = require("./photo.model");
+const Team = require("./team.model");
 const Person = require("./person.model");
 // const Gallery = require("./gallery.model");
 
@@ -19,10 +20,14 @@ About.belongsTo(Admin);
 Admin.hasMany(Event);
 Event.belongsTo(Admin);
 
-Admin.hasMany(Person);
-Person.belongsTo(Admin);
+Team.hasMany(Person);
+Person.belongsTo(Team);
+
+Admin.hasMany(Team);
+Team.belongsTo(Admin);
+
 
 /**
  * --- EXPORTING ALL MODELS ---
  */
-module.exports = { Admin, About, Event, Person };
+module.exports = { Admin, About, Event, Person, Team };

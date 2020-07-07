@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="/assets/css/init.css" />
+	<link rel="stylesheet" href="/assets/css/index.css" />
+</head>
+
+<body>
+	<main>
+		<header>
+			<h1>Judul Page</h1>
+		</header>
+		<%- include('components/navbar') %>
+		<article>
+			<h2><%- about.title %></h2>
+			<p>
+				<%- about.subtitle %>
+			</p>
+		</article>
+		<article>
+			<h2>Filosofi Logo Himaster Alpha</h2>
+			<% if (about.logo) { %>
+			<p><div class="fakeava" style="background-image: url('/assets/upload/images/<%= about.logo %>');"></div></p>
+			<% } else { %>
+			<p><div class="fakeava"></div></p>
+			<% } %>
+			<p>
+				<%- about.filosofi %>
+			</p>
+		</article>
+		<article>
+			<h2>Visi</h2>
+			<p>
+				<%- about.visi %>
+			</p>
+		</article>
+		<article>
+			<h2>Misi</h2>
+			<p>
+				<%- about.misi %>
+			</p>
+		</article>
+	</main>
+</body>
+
+</html>

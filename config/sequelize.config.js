@@ -12,7 +12,7 @@ const sequelize = new Sequelize("himaster", "root", null, {
 		await sequelize.sync({ force: resetTable });
 
 	} catch (err) {
-		throw err;
+		console.error('server mysql belum dinyalakan', err)
 	}
 })();
 

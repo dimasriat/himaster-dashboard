@@ -1,0 +1,53 @@
+HOME
+	get http://himaster.mipa.uns.ac.id/
+
+PROFILE
+	get http://himaster.mipa.uns.ac.id/profile
+
+EVENT
+	get http://himaster.mipa.uns.ac.id/event
+	get http://himaster.mipa.uns.ac.id/event/pingfest-2020
+
+TEAM
+	get http://himaster.mipa.uns.ac.id/team
+	get http://himaster.mipa.uns.ac.id/team/pengembangan-teknologi
+
+GALLERY
+	get http://himaster.mipa.uns.ac.id/gallery
+	get http://himaster.mipa.uns.ac.id/gallery/pingfest-2020
+
+LOGIN
+	get http://himaster.mipa.uns.ac.id/login
+	post http://himaster.mipa.uns.ac.id/login
+
+ADMIN
+	get http://himaster.mipa.uns.ac.id/admin
+
+ADMIN PROFILE
+	get http://himaster.mipa.uns.ac.id/admin/profile
+
+ADMIN EVENT
+	get http://himaster.mipa.uns.ac.id/admin/event
+	get http://himaster.mipa.uns.ac.id/admin/event/create/
+	get http://himaster.mipa.uns.ac.id/admin/event/read/pingfest-2020/
+	get http://himaster.mipa.uns.ac.id/admin/event/update/pingfest-2020/
+	get http://himaster.mipa.uns.ac.id/admin/event/delete/pingfest-2020/
+
+ADMIN GALLERY
+	get http://himaster.mipa.uns.ac.id/admin/gallery
+	post http://himaster.mipa.uns.ac.id/admin/gallery/create/
+	get http://himaster.mipa.uns.ac.id/admin/gallery/read/pingfest-2020/
+	put http://himaster.mipa.uns.ac.id/admin/gallery/update/pingfest-2020/
+	delete http://himaster.mipa.uns.ac.id/admin/gallery/delete/pingfest-2020/
+
+ADMIN TEAM
+	get http://himaster.mipa.uns.ac.id/admin/team
+	post http://himaster.mipa.uns.ac.id/admin/team/create
+	get http://himaster.mipa.uns.ac.id/admin/team/read/pengembangan-teknologi/
+	put http://himaster.mipa.uns.ac.id/admin/team/update/pengembangan-teknologi/
+	delete http://himaster.mipa.uns.ac.id/admin/team/delete/pengembangan-teknologi/
+
+
+DATA FLOW
+	data profil itu dari json
+	data event, team, gallery dari mysql
